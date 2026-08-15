@@ -1,24 +1,19 @@
-﻿namespace Connectle_Solver
+﻿using System.Text;
+
+namespace Connectle_Solver;
+public class ConnectleBoard(List<Node> selectedNodes)
 {
-    public class ConnectleBoard
+    private readonly StringBuilder _board = new StringBuilder();
+    public void DrawBoard()
     {
-        private int boardSize;
-
-        public ConnectleBoard(int boardSize)
+        for (int i = 0; i < 8; i++)
         {
-            this.boardSize = boardSize;
-        }
-
-        public void drawBoard()
-        {
-            for (int i = 0; i < boardSize; i++)
+            _board.Append("\n");
+            for (int j = 0; j < 8; j++)
             {
-                Console.Write("\n");
-                for (int j = 0; j < boardSize; j++)
-                {
-                    Console.Write("*  ");
-                }
+                _board.Append(Node.Contains(selectedNodes, j, i, out Node currentNode) ? $"{currentNode.nodeKey}  " : "*  ");
             }
         }
+        Console.WriteLine(_board.ToString());
     }
 }
